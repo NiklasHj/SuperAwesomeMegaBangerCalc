@@ -8,7 +8,7 @@ def addText(input):
 
 
 previousInput = tk.Label(text=previousInputStr)
-inputField = tk.Entry(justify="right",width=36,size=15)
+inputField = tk.Entry(justify="right",width=36)
 button = tk.Button(text="click",command=addText)
 
 previousInput.grid(row=0,column=0)
