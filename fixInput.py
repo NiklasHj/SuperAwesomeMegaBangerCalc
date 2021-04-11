@@ -1,5 +1,6 @@
 import math
 
+
 def convertInput(rawInput):
     rawInput = rawInput.replace(" ","")
     temp = ""
@@ -13,11 +14,17 @@ def convertInput(rawInput):
                 convertedInput.append(temp)
                 temp = ""
             convertedInput.append(x)
-    convertedInput.append(temp)
+    if temp != "":
+        convertedInput.append(temp)
     return convertedInput
 
 def fixFunctions(input):
-    for x in range(len(input)):
+    print(input)
+    print(len(input))
+    x = -1
+    for token in input:
+        x += 1
+        print(input[x])
         if input[x] == "s":
             input.pop(x+1)
             input.pop(x+1)
@@ -39,16 +46,39 @@ def fixFunctions(input):
             if input[x+1] != "(":
                 input.insert(x+1,"(")
                 input.insert(x+3,")")
+        if input[x] == "l" and input[x+1] == "n":
+            input.pop(x+1)
+            input[x] = "math.log"
+            if input[x+1] != "(":
+                input.insert(x+1,"(")
+                input.insert(x+3,")")
+        if input[x] == "l" and input[x+1] == "o":
+            input.pop(x+1)
+            input.pop(x+1)
+            input[x] = "math.log10"
+            if input[x+1] != "(":
+                input.insert(x+1,"(")
+                input.insert(x+3,")")      
     return input
-
+math.factorial
 def fixOperators(input):
     for x in range(len(input)):
         if input[x] == "^":
             input[x] = "**"
+        if input[x] == "√":
+            input[x] = "math.sqrt"
+            if input[x+1] != "(":
+                input.insert(x+1,"(")
+                input.insert(x+3,")")
         if input[x] == "π":
-            input[x] = "math.pi()"
+            input[x] = "math.pi"
+        if input[x] == "e":
+            input[x] = "math.e"
+    return input
 
-print(convertInput("sin34*2/5"))
-print(fixFunctions(convertInput("sin34*2/5")))
-print(eval("".join(fixFunctions(convertInput("sin34*2/5")))))
-print(math.pi,math.e)
+def calculate(input):
+    return fixOperators(fixFunctions(convertInput(input)))
+print(len(["","","","","","","",""]))
+print(convertInput("log(25*4)"))
+print(fixFunctions(convertInput("log(25*4)")))
+# print(eval("".join(fixFunctions(convertInput("log(25*4")))))
