@@ -112,3 +112,4 @@ window.mainloop()
 #               and ((the operator at the top of the operator stack has greater precedence)
 #                   or (the operator at the top of the operator stack has equal precedence and the token is left associative))
 #               and (the operator at the top of the operator stack is not a left parenthesis)):
+#cock
