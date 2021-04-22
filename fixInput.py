@@ -19,12 +19,9 @@ def convertInput(rawInput):
     return convertedInput
 
 def fixFunctions(input):
-    print(input)
-    print(len(input))
     x = -1
     for token in input:
         x += 1
-        print(input[x])
         if input[x] == "s":
             input.pop(x+1)
             input.pop(x+1)
@@ -62,7 +59,9 @@ def fixFunctions(input):
     return input
 math.factorial
 def fixOperators(input):
-    for x in range(len(input)):
+    x = -1
+    for token in input:
+        x += 1
         if input[x] == "^":
             input[x] = "**"
         if input[x] == "√":
@@ -78,7 +77,7 @@ def fixOperators(input):
 
 def calculate(input):
     return fixOperators(fixFunctions(convertInput(input)))
-print(len(["","","","","","","",""]))
-print(convertInput("log(25*4)"))
-print(fixFunctions(convertInput("log(25*4)")))
+
+# print(convertInput("log(25*4)"))
+# print(fixFunctions(convertInput("log(25*4)")))
 # print(eval("".join(fixFunctions(convertInput("log(25*4")))))

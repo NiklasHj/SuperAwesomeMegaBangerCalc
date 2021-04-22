@@ -32,7 +32,7 @@ previousInput.grid(row=0,column=0,columnspan=5)
 inputField.grid(row=1,column=0,columnspan=5)
 
 
-buttonHeight=2
+buttonHeight=3
 buttonWidth=9
 siffrorY=4
 siffrorX=1
@@ -109,7 +109,7 @@ bGraph = tk.Button(text = "Graph",height=buttonHeight,width=buttonWidth,bg="yell
 bGraph.grid(row=operatorY-5, column=operatorX-4,)
 window.mainloop()
 # while ((there is an operator at the top of the operator stack)
-#               and ((the operator at the top of the operator stack has greater precedence)
+#               and ((the operator at the top of the operator stack has greater  ecedence)
 #                   or (the operator at the top of the operator stack has equal precedence and the token is left associative))
 #               and (the operator at the top of the operator stack is not a left parenthesis)):
 #cock
