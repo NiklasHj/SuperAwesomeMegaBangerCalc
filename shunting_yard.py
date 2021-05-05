@@ -13,7 +13,7 @@ def convertInput(rawInput):
             convertedInput.append(x)
     return convertedInput
 
-convertedInput = convertInput("3 + 4 * 2 / ( 1 - 5 ) ^ 2 ^ 3")
+convertedInput = convertInput("3 + 4 * 2 / ( 1 * (5-2) ^ 2 ^ 3")
 print(convertedInput)
 
 outputQue = []
