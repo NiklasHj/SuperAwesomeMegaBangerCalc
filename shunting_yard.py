@@ -13,47 +13,59 @@ def convertInput(rawInput):
             convertedInput.append(x)
     return convertedInput
 
-convertedInput = convertInput("3 + 4 * 2 / ( 1 - 5 ) ^ 2 ^ 3")
-print(convertedInput)
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
 
-outputQue = []
-operatorStack = []
-precedence = 0
-associative = ""
-for token in convertedInput:
-    if token in "0123456789":
-        outputQue.append(token)
-    elif token in "+-*/^":
-        if token in "+-":
-            precedence = 2
-            associative = "left"
-        if token in "*/":
-            precedence = 3
-            associative = "left"
-        if token in "^":
-            precedence = 4
-            associative = "right"
-        while ((len(operatorStack) != 0) and ((operatorStack[-1][1] > precedence) or (operatorStack[-1][1] == precedence and associative == "left")) and (operatorStack[-1][0] != "(")):
-            outputQue.append(operatorStack.pop(-1)[0])
-        operatorStack.append([token,precedence,associative])
-    elif token == "(":
-        operatorStack.append([token,0,0])
-    elif token == ")":
-        while operatorStack[-1][0] != "(":
-            outputQue.append(operatorStack.pop(-1)[0])
-            if len(operatorStack) == 0:
-                print("missmatched parentheses")
-                # return "Missmatched parentheses"
-        if operatorStack[-1][0] == "(":
-            operatorStack.pop(-1)
-# if there is a function token at the top of the operator stack, then:
-# #             pop the function from the operator stack onto the output queue.
-if len(operatorStack) != 0:
-    for n in range(len(operatorStack)):
-        outputQue.append(operatorStack.pop(-1)[0])
+def shuntingYard(rawInput):
+
+    convertedInput = convertInput(rawInput)
+
+    outputQue = []
     operatorStack = []
+    precedence = 0
+    associative = ""
+    for token in convertedInput:
+        if is_number(token) == True:
+            outputQue.append(token)
+        elif token in "+-*/^":
+            if token in "+-":
+                precedence = 2
+                associative = "left"
+            if token in "*/":
+                precedence = 3
+                associative = "left"
+            if token in "^":
+                precedence = 4
+                associative = "right"
+            while ((len(operatorStack) != 0) and ((operatorStack[-1][1] > precedence) or (operatorStack[-1][1] == precedence and associative == "left")) and (operatorStack[-1][0] != "(")):
+                outputQue.append(operatorStack.pop(-1)[0])
+            operatorStack.append([token,precedence,associative])
+        elif token == "(":
+            operatorStack.append([token,0,0])
+        elif token == ")":
+            while operatorStack[-1][0] != "(":
+                outputQue.append(operatorStack.pop(-1)[0])
+                if len(operatorStack) == 0:
+                    return "Missmatched parentheses"
+            if operatorStack[-1][0] == "(":
+                operatorStack.pop(-1)
+    # if there is a function token at the top of the operator stack, then:
+    # #             pop the function from the operator stack onto the output queue.
+    if len(operatorStack) != 0:
+        for n in range(len(operatorStack)):
+            outputQue.append(operatorStack.pop(-1)[0])
+        operatorStack = []
+    return outputQue
 
-print(outputQue)
+print(shuntingYard("30 + 4 * 2 / ( 1 - 5 ) ^ 2 ^ 3"))
+print(convertInput("30 + 4 * 2 / ( 1 - 5 ) ^ 2 ^ 3"))
+    
+if "30" in "0123456789":
+    print("ja")
 # while there are tokens to be read:
 #     read a token.
 #     if the token is a number, then:
