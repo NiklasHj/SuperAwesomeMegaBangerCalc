@@ -13,6 +13,32 @@ def convertInput(rawInput):
                 convertedInput.append(temp)
                 temp = ""
             convertedInput.append(x)
+    x = 0
+    while x <= len(convertedInput)-1:
+        if convertedInput[x] == "π":
+            convertedInput[x] = "math.pi"
+        elif convertedInput[x] == "e":
+            convertedInput[x] = "math.e"
+        elif convertedInput[x] == "s":
+            convertedInput[x] = "sin"
+            convertedInput.pop(x+1)
+            convertedInput.pop(x+1)
+        elif convertedInput[x] == "c":
+            convertedInput[x] = "cos"
+            convertedInput.pop(x+1)
+            convertedInput.pop(x+1)
+        elif convertedInput[x] == "t":
+            convertedInput[x] = "tan"
+            convertedInput.pop(x+1)
+            convertedInput.pop(x+1)
+        elif convertedInput[x] == "l" and convertedInput[x+1] == "o":
+            convertedInput[x] = "log"
+            convertedInput.pop(x+1)
+            convertedInput.pop(x+1)
+        elif convertedInput[x] == "l" and convertedInput[x+1] == "n":
+            convertedInput[x] = "ln"
+            convertedInput.pop(x+1)
+        x += 1
     return convertedInput
 
 def is_number(s):
