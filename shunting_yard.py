@@ -1,4 +1,4 @@
-import RPN_calculator as RPN
+
 
 def convertInput(rawInput):
     rawInput = rawInput.replace(" ","")
@@ -93,13 +93,45 @@ def shuntingYard(convertedInput):
         for n in range(len(operatorStack)):
             outputQue.append(operatorStack.pop(-1)[0])
         operatorStack = []
-    return RPN.RPNCalculator(outputQue)
+    return RPNCalculator(outputQue)
 
+def RPNCalculator(tal):
+    while len(tal) != 1:
+        for x in range(len(tal)):
+            if tal[x] in "+-*/^" and is_number(tal[x]) == False:
+                print(tal)
+                print(tal[x-2],tal[x-1])
+                if tal[x] == "+":
+                    tal[x] = str(float(tal[x-2]) + float(tal[x-1]))
+                    tal.pop(x-1)
+                    tal.pop(x-2)
+                elif tal[x] == "-":
+                    tal[x] = str(float(tal[x-2]) - float(tal[x-1]))
+                    tal.pop(x-1)
+                    tal.pop(x-2)
+                elif tal[x] == "*":
+                    tal[x] = str(float(tal[x-2]) * float(tal[x-1]))
+                    tal.pop(x-1)
+                    tal.pop(x-2)
+                elif tal[x] == "/":
+                    tal[x] = str(float(tal[x-2]) / float(tal[x-1]))
+                    tal.pop(x-1)
+                    tal.pop(x-2)
+                elif tal[x] == "^":
+                    tal[x] = str(float(tal[x-2]) ** float(tal[x-1]))
+                    tal.pop(x-1)
+                    tal.pop(x-2)
+                break
+            elif tal[x] in "√":
+                if tal[x] == "√":
+                    tal[x] = str(float(tal[x-1]) ** 0.5)
+                    tal.pop(x-1)
+                break
+    return tal[0]
+# print(RPNCalculator(["3" ,"4" ,"2" ,"*","1", "5", "-", "2", "3", "^", "^", "/", "+"]))
 print(shuntingYard(convertInput("30 + 4 * 2 / ( 1 - 5 ) ^ 2 ^ 3")))
-print(convertInput("30 + 4 * 2 / ( 1 - 5 ) ^ 2 ^ 3"))
-    
-if "30" in "0123456789":
-    print("ja")
+# print(convertInput("30 + 4 * 2 / ( 1 - 5 ) ^ 2 ^ 3"))
+
 # while there are tokens to be read:
 #     read a token.
 #     if the token is a number, then:

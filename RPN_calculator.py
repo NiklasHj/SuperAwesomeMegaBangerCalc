@@ -1,7 +1,9 @@
+import shunting_yard as sy
+
 def RPNCalculator(tal):
     while len(tal) != 1:
         for x in range(len(tal)):
-            if tal[x][0] in "+-*/^" and tal[x][0] in "012345689":
+            if tal[x][0] in "+-*/^" and sy.is_number(tal[x][0]) == False:
                 print(tal)
                 print(tal[x-2],tal[x-1])
                 if tal[x][0] == "+":
@@ -32,4 +34,4 @@ def RPNCalculator(tal):
                 break
     return tal
 
-print(RPNCalculator(["3" ,"4" ,"2" ,"*","1", "5", "-", "2", "3", "^", "^", "/", "+"]))
+# print(RPNCalculator(["3" ,"4" ,"2" ,"*","1", "5", "-", "2", "3", "^", "^", "/", "+"]))
